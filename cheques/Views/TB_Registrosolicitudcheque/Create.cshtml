@@ -1,11 +1,11 @@
 ﻿@model cheques.Context.TB_Registrosolicitudcheque
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Solicitud de cheque";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Nueva Solicitud de cheque</h2>
 
 
 @using (Html.BeginForm())
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
 <div class="container-fluid">
-    <h4>TB_Registrosolicitudcheque</h4>
+    <h4>Ingrese los datos</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -70,7 +70,7 @@
                 <option disabled>Elije estado</option>
                 <option value="Pendiente" selected>Pendiente</option>
                 <option value="Anulado">Anulado</option>
-                <option value="Generado">Generado</option>
+                <option value="Generado" disabled>Generado</option>
             </select>
             @Html.ValidationMessageFor(model => model.estado_estatus, "", new { @class = "text-danger" })
         </div>
