@@ -10,9 +10,8 @@ namespace cheques.Context
     {
         [Key]
         public int id_solicitud { get; set; }
-        [Display(Name = "Proveedor")]
 
-        
+        [Display(Name = "Proveedor")]
         public int id_proveedor { get; set; }
 
         [Display(Name = "Concepto Cheque")]

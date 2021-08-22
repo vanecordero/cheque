@@ -19,20 +19,26 @@ namespace cheques.Context
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "Tipo de persona")]
         public string Tipo_Persona { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Identificacion")]
         public string Cedula_or_RNC { get; set; }
 
+        [Display(Name = "Balance")]
         public int Balance { get; set; }
 
+        [Display(Name = "num. de cuenta")]
         public int Cuenta_contable_proveedor { get; set; }
 
+        [Display(Name = "Estado")]
         public bool Estado { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

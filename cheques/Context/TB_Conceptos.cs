@@ -17,9 +17,11 @@ namespace cheques.Context
         [Key]
         public int id_Identificador { get; set; }
 
+        [Display(Name = "Descripcion")]
         [StringLength(50)]
         public string Descripcion { get; set; }
 
+        [Display(Name = "Estado")]
         public bool Estado { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

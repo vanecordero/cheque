@@ -8,107 +8,109 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+<div class="container-fluid">
     <h4>TB_Registrosolicitudcheque</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<form class="row">
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.id_proveedor, "id_proveedor", htmlAttributes: new { @class = "control-label", type = "date" })
+    <form class="row">
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.id_proveedor, htmlAttributes: new { @class = "control-label", type = "date" })
 
-        @Html.DropDownList("id_proveedor", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.id_proveedor, "", new { @class = "text-danger" })
+            @Html.DropDownList("id_proveedor", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.id_proveedor, "", new { @class = "text-danger" })
 
-    </div>
-
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.id_identificador, "id_identificador", htmlAttributes: new { @class = "form-label" })
-
-        @Html.DropDownList("id_identificador", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.id_identificador, "", new { @class = "text-danger" })
-
-    </div>
-
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "form-label" })
-
-        @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
-
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.fecha_registro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fecha_registro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fecha_registro, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.fecha_registro, htmlAttributes: new { @class = "form-label col-md-2" })
-        @Html.EditorFor(model => model.fecha_registro, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.fecha_registro, "", new { @class = "text-danger" })
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.estado_estatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.estado_estatus, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.estado_estatus, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.estado_estatus, htmlAttributes: new { @class = "form-label" })
-        <select name="estado_estatus" class="form-control">
-            <option disabled>Elije estado</option>
-            <option value="Pendiente" selected>Pendiente</option>
-            <option value="Anulado">Anulado</option>
-            <option value="Generado">Generado</option>
-        </select>
-        @Html.ValidationMessageFor(model => model.estado_estatus, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.cuenta_contable_proveedor, htmlAttributes: new { @class = "form-label" })
-
-        @Html.EditorFor(model => model.cuenta_contable_proveedor, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.cuenta_contable_proveedor, "", new { @class = "text-danger" })
-
-    </div>
-
-
-    <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
-        @Html.LabelFor(model => model.cuenta_empresa, htmlAttributes: new { @class = "form-label" })
-        @Html.EditorFor(model => model.cuenta_empresa, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.cuenta_empresa, "", new { @class = "text-danger" })
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.id_asiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.id_asiento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.id_asiento, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
         </div>
-    </div>
-</form>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.id_identificador, htmlAttributes: new { @class = "form-label" })
+
+            @Html.DropDownList("id_identificador", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.id_identificador, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "form-label" })
+
+            @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.fecha_registro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fecha_registro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fecha_registro, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.fecha_registro, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.fecha_registro, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.fecha_registro, "", new { @class = "text-danger" })
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.estado_estatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.estado_estatus, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.estado_estatus, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.estado_estatus, htmlAttributes: new { @class = "form-label" })
+            <select name="estado_estatus" class="form-control">
+                <option disabled>Elije estado</option>
+                <option value="Pendiente" selected>Pendiente</option>
+                <option value="Anulado">Anulado</option>
+                <option value="Generado">Generado</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.estado_estatus, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.cuenta_contable_proveedor, htmlAttributes: new { @class = "form-label" })
+
+            @Html.EditorFor(model => model.cuenta_contable_proveedor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cuenta_contable_proveedor, "", new { @class = "text-danger" })
+
+        </div>
+
+
+        <div class="col-md-4 col-12 mt-md-2" style="margin-top: 10px; min-height: 80px;">
+            @Html.LabelFor(model => model.cuenta_empresa, htmlAttributes: new { @class = "form-label" })
+            @Html.EditorFor(model => model.cuenta_empresa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cuenta_empresa, "", new { @class = "text-danger" })
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.id_asiento, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.id_asiento, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.id_asiento, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
 </div>
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
