@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChequesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TB_Conceptos">
+    <Key>
+      <PropertyRef Name="id_Identificador" />
+    </Key>
+    <Property Name="id_Identificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TB_Proveedores">
+    <Key>
+      <PropertyRef Name="id_proveedor" />
+    </Key>
+    <Property Name="id_proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tipo_Persona" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Cedula_or_RNC" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Balance" Type="int" Nullable="false" />
+    <Property Name="Cuenta_contable_proveedor" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TB_Registrosolicitudcheque">
+    <Key>
+      <PropertyRef Name="id_solicitud" />
+    </Key>
+    <Property Name="id_solicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_proveedor" Type="int" Nullable="false" />
+    <Property Name="id_identificador" Type="int" Nullable="false" />
+    <Property Name="monto" Type="int" Nullable="false" />
+    <Property Name="fecha_registro" Type="date" Nullable="false" />
+    <Property Name="estado_estatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cuenta_contable_proveedor" Type="int" Nullable="false" />
+    <Property Name="cuenta_empresa" Type="int" Nullable="false" />
+    <Property Name="id_asiento" Type="int" />
+  </EntityType>
+  <Association Name="FK_TB_Registrosolicitudcheque_TB_Proveedores">
+    <End Role="TB_Proveedores" Type="Self.TB_Proveedores" Multiplicity="1" />
+    <End Role="TB_Registrosolicitudcheque" Type="Self.TB_Registrosolicitudcheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TB_Proveedores">
+        <PropertyRef Name="id_proveedor" />
+      </Principal>
+      <Dependent Role="TB_Registrosolicitudcheque">
+        <PropertyRef Name="id_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TB_Registrosolicitudcheque_TB_Registrosolicitudcheque">
+    <End Role="TB_Registrosolicitudcheque" Type="Self.TB_Registrosolicitudcheque" Multiplicity="1" />
+    <End Role="TB_Registrosolicitudcheque1" Type="Self.TB_Registrosolicitudcheque" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TB_Registrosolicitudcheque">
+        <PropertyRef Name="id_solicitud" />
+      </Principal>
+      <Dependent Role="TB_Registrosolicitudcheque1">
+        <PropertyRef Name="id_solicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChequesModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_Conceptos" EntityType="Self.TB_Conceptos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_Proveedores" EntityType="Self.TB_Proveedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TB_Registrosolicitudcheque" EntityType="Self.TB_Registrosolicitudcheque" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TB_Registrosolicitudcheque_TB_Proveedores" Association="Self.FK_TB_Registrosolicitudcheque_TB_Proveedores">
+      <End Role="TB_Proveedores" EntitySet="TB_Proveedores" />
+      <End Role="TB_Registrosolicitudcheque" EntitySet="TB_Registrosolicitudcheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TB_Registrosolicitudcheque_TB_Registrosolicitudcheque" Association="Self.FK_TB_Registrosolicitudcheque_TB_Registrosolicitudcheque">
+      <End Role="TB_Registrosolicitudcheque" EntitySet="TB_Registrosolicitudcheque" />
+      <End Role="TB_Registrosolicitudcheque1" EntitySet="TB_Registrosolicitudcheque" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

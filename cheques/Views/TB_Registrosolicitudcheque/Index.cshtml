@@ -1,0 +1,76 @@
+﻿@model IEnumerable<cheques.Context.TB_Registrosolicitudcheque>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_Conceptos.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_Proveedores.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_registro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado_estatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cuenta_contable_proveedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cuenta_empresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_asiento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_Conceptos.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_Proveedores.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_registro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado_estatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cuenta_contable_proveedor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cuenta_empresa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_asiento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_solicitud }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_solicitud }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_solicitud })
+        </td>
+    </tr>
+}
+
+</table>

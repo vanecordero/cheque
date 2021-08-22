@@ -1,0 +1,67 @@
+﻿@model cheques.Context.TB_Proveedores
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TB_Proveedores</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_Persona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_Persona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula_or_RNC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cedula_or_RNC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cuenta_contable_proveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cuenta_contable_proveedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_proveedor }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
