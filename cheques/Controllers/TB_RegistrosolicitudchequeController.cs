@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using cheques.Context;
 
@@ -15,6 +16,7 @@ namespace cheques.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TB_Registrosolicitudcheque
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public ActionResult Index()
         {
             var tB_Registrosolicitudcheque = db.TB_Registrosolicitudcheque.Include(t => t.TB_Conceptos).Include(t => t.TB_Proveedores);
@@ -132,5 +134,8 @@ namespace cheques.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        
     }
 }

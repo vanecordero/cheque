@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" id="allElement">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.TB_Conceptos.Descripcion)
@@ -18,9 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TB_Proveedores.Nombre)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.monto)
-        </th>
+        <th>Monto</th>
         <th>
             @Html.DisplayNameFor(model => model.fecha_registro)
         </th>
@@ -33,44 +31,172 @@
         <th>
             @Html.DisplayNameFor(model => model.cuenta_empresa)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_asiento)
-        </th>
+        <th hidden>IdAsiento</th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_Conceptos.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TB_Proveedores.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.monto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha_registro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado_estatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cuenta_contable_proveedor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cuenta_empresa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_asiento)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_solicitud }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_solicitud }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_solicitud })
-        </td>
-    </tr>
-}
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TB_Conceptos.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TB_Proveedores.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.monto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_registro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado_estatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cuenta_contable_proveedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cuenta_empresa)
+                </td>
+                <td hidden>@Html.DisplayFor(modelItem => item.id_asiento)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_solicitud }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_solicitud }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_solicitud })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+<div>
+    <button type="button" class="btn btn-primary" id="btngetAsiento">Crear Asiento Contable</button>
+</div>
+
+@section scripts {
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var datatrasc = [];
+        var datanull;
+        var objCheque;
+        var objctEnviado = [];
+        var chequesobj = [];
+        var datoObj = {};
+
+
+       
+
+        $(document).ready(function (event) {
+            var myRows = [];
+            var $headers = $("th");
+            var $rows = $("#allElement tbody tr").each(function (index) {
+                $cells = $(this).find("td");
+                myRows[index] = {};
+                $cells.each(function (cellIndex) {
+                    myRows[index][$($headers[cellIndex]).html()] = $(this).html();
+                });
+            });
+
+            // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
+            var myObj = {};
+            myObj.myrows = myRows;
+
+            $("#btngetAsiento").click(function () {
+                console.log('click')
+                var newObj = myObj.myrows;
+                i = 0;
+                // delete all objects with descrip of tuna
+                Object.keys(newObj).forEach(function (key) {
+                    if (newObj[key].IdAsiento != 'null') {
+                        objctEnviado[i] = newObj[key];
+                        i++;
+                    }
+                });
+                objctEnviado.shift();
+
+                for (let z = 0; z < objctEnviado.length; z++) {
+                    var mont = objctEnviado[z].Monto.trim();
+                    chequesobj[z] = {
+                        "cuentasContablesId": 9,
+                        "tipoMovimientoId": 2,
+                        "monto": mont
+                    }
+                }
+
+
+                var today = new Date();
+                datoObj = {
+                    "descripcion": "Asientos Cheques prueba desde c#",
+                    "catalogoAuxiliarId": 2,
+                    "fecha": today,
+                    "estado": "R",
+                    "tasaCambio": 1,
+                    "monedasId": 1,
+                    "transacciones": chequesobj
+                }
+                getIdapi(datoObj)
+            });
+
+            
+
+
+            function getIdapi(obj) {
+                console.log('llama api');
+                var settings = {
+                    "url": "https://contabilidad2021.azurewebsites.net/api/Asientos",
+                    "method": "POST",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify(obj),
+                };
+
+                $.ajax(settings).done(function (response) {
+                    console.log('respuesta api');
+                    console.log(response);
+                    console.log('asiento Id: '+response.id);
+                });
+
+               /* $.ajax({
+                    data: JSON.stringify(obj),
+                    dataType: "json",
+                    url: "https://contabilidad2021.azurewebsites.net/api/Asientos",
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (data) {
+                        console.log('success')
+                        console.log(data);
+                    }, error: function (errMsg) {
+                        console.log('error');
+                        console.log(errMsg);
+                    }
+                });*/
+
+                //$.ajax({
+                //    type: "POST",
+                //    url: "https://contabilidad2021.azurewebsites.net/api/Asientos",
+                //    data: obj,
+                //    contentType: "application/json; charset=utf-8",
+                //    dataType: "json",
+                //    async: true,
+                //    crossDomain: true,
+                //    success: function (data) {
+                //        console.log('sucess');
+                //        console.log(data);
+                //        console.log(data.id);
+                //        //  fillIdAsiento(data.id);
+                //    },
+                //    error: function (errMsg) {
+                //        console.log('error');
+                //        console.log(errMsg);
+                //    }
+                //});
+            }
+        });
+    </script>
+
+}
