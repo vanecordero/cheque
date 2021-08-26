@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Proveedores</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo Proveedor", "Create")
 </p>
 <table class="table">
     <tr>
@@ -51,12 +51,19 @@
             @Html.DisplayFor(modelItem => item.Cuenta_contable_proveedor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @if (item.Estado)
+            {
+                <span>Activo</span>
+            }
+            else
+            {
+                <span>Inactivo</span>
+            }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_proveedor }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_proveedor }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_proveedor })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_proveedor }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_proveedor }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_proveedor })
         </td>
     </tr>
 }

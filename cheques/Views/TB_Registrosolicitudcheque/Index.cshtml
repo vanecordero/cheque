@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Registro de cheques</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nueva sol. cheque", "Create")
 </p>
 <table class="table" id="allElement">
     <tr>
@@ -61,9 +61,9 @@
                 </td>
                 <td hidden>@Html.DisplayFor(modelItem => item.id_asiento)</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_solicitud }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_solicitud }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_solicitud })
+                    @Html.ActionLink("Editar", "Edit", new { id = item.id_solicitud }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.id_solicitud }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.id_solicitud })
                 </td>
             </tr>
         }

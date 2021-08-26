@@ -48,6 +48,12 @@ namespace cheques.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id_proveedor,Nombre,Tipo_Persona,Cedula_or_RNC,Balance,Cuenta_contable_proveedor,Estado")] TB_Proveedores tB_Proveedores)
         {
+            if (!validaCedula(tB_Proveedores.Cedula_or_RNC))
+
+            {
+                ModelState.AddModelError("Cedula_or_RNC", "La identificacion digitada es incorrecta");
+            }
+
             if (ModelState.IsValid)
             {
                 db.TB_Proveedores.Add(tB_Proveedores);
@@ -107,12 +113,36 @@ namespace cheques.Controllers
         // POST: TB_Proveedores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id) 
         {
             TB_Proveedores tB_Proveedores = db.TB_Proveedores.Find(id);
             db.TB_Proveedores.Remove(tB_Proveedores);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public static bool validaCedula(string pCedula)
+        {
+            int vnTotal = 0;
+            string vcCedula = pCedula.Replace("-", "");
+            int pLongCed = vcCedula.Trim().Length;
+            int[] digitoMult = new int[11] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+
+            if (pLongCed < 11 || pLongCed > 11)
+                return false;
+
+            for (int vDig = 1; vDig <= pLongCed; vDig++)
+            {
+                int vCalculo = Int32.Parse(vcCedula.Substring(vDig - 1, 1)) * digitoMult[vDig - 1];
+                if (vCalculo < 10)
+                    vnTotal += vCalculo;
+                else
+                    vnTotal += Int32.Parse(vCalculo.ToString().Substring(0, 1)) + Int32.Parse(vCalculo.ToString().Substring(1, 1));
+            }
+
+            if (vnTotal % 10 == 0)
+                return true;
+            else
+                return false;
         }
 
         protected override void Dispose(bool disposing)

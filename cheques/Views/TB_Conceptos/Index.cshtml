@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Conceptos cheque</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Ingresar nuevo concepto", "Create")
 </p>
 <table class="table">
     <tr>
@@ -27,12 +27,19 @@
             @Html.DisplayFor(modelItem => item.Descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado)
+            @if (item.Estado)
+            {
+                <span>Activo</span>
+            }
+            else
+            {
+                <span>Inactivo</span>
+            }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id_Identificador }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id_Identificador }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id_Identificador })
+            @Html.ActionLink("Editar", "Edit", new { id=item.id_Identificador }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_Identificador }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_Identificador })
         </td>
     </tr>
 }
